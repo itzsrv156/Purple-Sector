@@ -31,7 +31,7 @@ export default function GuidePage() {
         </h1>
         <Reveal d={1}>
           <p className="lead" style={{ maxWidth: 720 }}>
-            Everything you need to enjoy Formula 1 like a pro without telemetry jargon. Flags, tyre strategies, 2026 active aero, and paddock slang decoded.
+            The essential paddock playbook. Race flags, tyre strategies, sprint formats, the 2026 active aero & engine overhaul, and essential trackside slang.
           </p>
         </Reveal>
       </div>

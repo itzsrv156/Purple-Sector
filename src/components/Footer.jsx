@@ -15,7 +15,7 @@ export default function Footer() {
               <h4 style={{ margin: 0 }}>Purple Sector</h4>
             </div>
             <p className="muted" style={{ maxWidth: '38ch' }}>
-              A fan-first Formula 1 hub — every race winner, every driver, every circuit, without the telemetry overload.
+              Built for pure racing speed — live 2026 title fights, authentic circuit records, and the thrill of lights out.
             </p>
           </div>
           <div>

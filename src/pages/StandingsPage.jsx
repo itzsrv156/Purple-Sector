@@ -36,7 +36,7 @@ export default function StandingsPage() {
         </h1>
         <Reveal d={1}>
           <p className="lead" style={{ maxWidth: 720 }}>
-            Official World Drivers’ and Constructors’ standings with real race results, points progression, sprint allocations, and pole tallies.
+            Official World Drivers’ and Constructors’ championship standings. Real race points, podium tallies, sprint points, and title progression.
           </p>
         </Reveal>
       </div>

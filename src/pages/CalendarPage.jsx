@@ -41,7 +41,7 @@ export default function CalendarPage() {
         </h1>
         <Reveal d={1}>
           <p className="lead" style={{ maxWidth: 720 }}>
-            All {totalCount} Grand Prix weekends mapped with real GPS circuit layouts, sprint weekend alerts, pole positions, and race classifications.
+            All {totalCount} Grand Prix weekends across five continents. Sprint shootouts, lights-out countdowns, pole benchmarks, and official race classifications.
           </p>
         </Reveal>
       </div>

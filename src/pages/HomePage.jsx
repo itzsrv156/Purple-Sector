@@ -70,7 +70,7 @@ export default function HomePage() {
 
           <Reveal d={2}>
             <p className="lead" style={{ marginBottom: 36 }}>
-              Formula 1 reimagined for the fans. No telemetry overload, no gatekeeping — just authentic race results, authentic track layouts, driver cutouts, and pure racing thrills.
+              Built for pure racing speed. Live 2026 title fights, raw grid rivalries, real circuit records, and the thrill of five red lights going out.
             </p>
           </Reveal>
 
@@ -231,7 +231,7 @@ export default function HomePage() {
             <div>
               <span className="kicker">THE 2026 GRID</span>
               <h2 className="h-display h-lg">FEATURED DRIVERS</h2>
-              <p className="sub">Hover over cards to see the 3D cut-out driver pop-out effect.</p>
+              <p className="sub">Full 2026 driver grid — tap any driver for in-depth race telemetry and championship form.</p>
             </div>
             <TLink to="/drivers" className="btn btn-ghost">
               <span>View All 22 Drivers</span>
@@ -255,7 +255,7 @@ export default function HomePage() {
           <div className="panel" style={{ padding: 'clamp(32px, 6vw, 64px)', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
             <h2 className="h-display h-lg" style={{ marginBottom: 16 }}>THINK YOU KNOW FORMULA 1?</h2>
             <p className="lead" style={{ margin: '0 auto 28px' }}>
-              Put your knowledge to the test with our custom 15-question F1 trivia quiz — covering 2026 regulation updates, historical records, and iconic moments.
+              Test your racing IQ across 10 intense rounds — 2026 active aero changes, legendary overtakes, and historic championship deciders.
             </p>
             <TLink to="/quiz" className="btn btn-primary" style={{ padding: '18px 36px', fontSize: '1.05rem' }}>
               <Zap style={{ color: 'var(--yellow)' }} />

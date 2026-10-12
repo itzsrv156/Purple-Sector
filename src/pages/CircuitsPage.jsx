@@ -38,7 +38,7 @@ export default function CircuitsPage() {
         </h1>
         <Reveal d={1}>
           <p className="lead" style={{ maxWidth: 720 }}>
-            Every corner, straight, and braking zone mapped with GPS-accurate racing lines. From Monza’s Temple of Speed and Monaco’s tight streets to Sepang and Bahrain.
+            26 iconic asphalt arenas. GPS-accurate apex layouts, DRS zones, corner counts, all-time race lap records, and qualifying pole benchmarks.
           </p>
         </Reveal>
       </div>

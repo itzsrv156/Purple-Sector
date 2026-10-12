@@ -16,15 +16,16 @@ export function observeOnce(el, cb) {
           fn && fn();
         }
       }
-    }, { rootMargin: '0px 0px -7% 0px', threshold: 0.06 });
+    }, { rootMargin: '80px 0px 50px 0px', threshold: 0.01 });
   }
   callbacks.set(el, cb);
   io.observe(el);
   return () => { io.unobserve(el); callbacks.delete(el); };
 }
 
+// Only reduce motion if explicitly requested by user toggle, keeping animations vibrant on all devices
 export const prefersReduced = () =>
-  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  typeof window !== 'undefined' && window.__forceReducedMotion === true;
 
 export const isDesktopPointer = () =>
   typeof window !== 'undefined' && window.matchMedia('(hover: hover) and (pointer: fine) and (min-width: 900px)').matches;

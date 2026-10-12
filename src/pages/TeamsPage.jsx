@@ -26,7 +26,7 @@ export default function TeamsPage() {
         </h1>
         <Reveal d={1}>
           <p className="lead" style={{ maxWidth: 720 }}>
-            The 11 constructor powerhouses designing, building and racing multi-million dollar engineering marvels in the 2026 World Championship.
+            11 constructor garages fighting for the World Championship. Team principals, engine specs, 2026 liveries, and driver pairings.
           </p>
         </Reveal>
       </div>

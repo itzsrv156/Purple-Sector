@@ -53,7 +53,7 @@ export default function DriversPage() {
         </h1>
         <Reveal d={1}>
           <p className="lead" style={{ maxWidth: 720 }}>
-            Meet the 22 gladiators competing in the 2026 World Championship. Explore career stats, 3D pop-out cutouts, team allegiances, and race results.
+            The 2026 grid. 22 drivers, 11 teams, and one trophy. Full season pace, career victories, and head-to-head garage battles.
           </p>
         </Reveal>
       </div>

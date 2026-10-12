@@ -48,7 +48,7 @@ export default function ComparePage() {
         </h1>
         <Reveal d={1}>
           <p className="lead" style={{ maxWidth: 720 }}>
-            Put any two drivers side-by-side to compare career achievements, world championships, 2026 form, and race-craft.
+            Settle the debate. Put any two drivers wheel-to-wheel across career championships, race wins, qualifying poles, and podium rates.
           </p>
         </Reveal>
       </div>
