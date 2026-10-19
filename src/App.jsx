@@ -4,6 +4,7 @@ import Lenis from 'lenis';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Cursor from './components/Cursor';
+import LapProgress from './components/LapProgress';
 import { TransitionProvider } from './components/Transition';
 import { isDesktopPointer, prefersReduced } from './lib/motion';
 import './index.css';
@@ -54,6 +55,7 @@ function Shell() {
       <div className="grain" aria-hidden="true" />
       <Cursor />
       <Navbar />
+      <LapProgress />
       <main id="main" key={pathname.split('/')[1]}>
         <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
           <Routes>

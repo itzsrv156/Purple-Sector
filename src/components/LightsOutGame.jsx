@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Zap, RotateCcw, Volume2, VolumeX, Trophy, AlertTriangle, Sparkles, CheckCircle2 } from 'lucide-react';
 
-// Web Audio sound synthesizer for zero-latency, realistic F1 acoustic feedback
+// Authentic FOM Television Broadcast & FIA Start Audio Engine
 class F1SoundEngine {
   constructor() {
     this.ctx = null;
     this.muted = false;
-    this.rumbleOsc = null;
-    this.rumbleGain = null;
   }
 
   init() {
@@ -22,101 +20,89 @@ class F1SoundEngine {
     }
   }
 
-  beep(freq = 600, duration = 0.12) {
+  // Authentic 1000Hz - 1100Hz crisp electronic broadcast pip on each red light
+  pip(lightIndex = 1) {
     if (this.muted) return;
     this.init();
     if (!this.ctx) return;
     try {
       const osc = this.ctx.createOscillator();
       const gain = this.ctx.createGain();
-      osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
-      gain.gain.setValueAtTime(0.15, this.ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + duration);
+      osc.type = 'sine';
+      // Official clean electronic chime tone
+      osc.frequency.setValueAtTime(1050 + (lightIndex - 1) * 30, this.ctx.currentTime);
+      gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.07);
       osc.connect(gain);
       gain.connect(this.ctx.destination);
       osc.start();
-      osc.stop(this.ctx.currentTime + duration);
+      osc.stop(this.ctx.currentTime + 0.075);
     } catch {
-      // Audio context error fallback
+      // Audio fallback
     }
   }
 
-  startRumble() {
+  // Realistic high-octane F1 V6 turbo hybrid launch roar at lights out
+  launchRoar() {
     if (this.muted) return;
     this.init();
     if (!this.ctx) return;
     try {
-      this.stopRumble();
-      this.rumbleOsc = this.ctx.createOscillator();
-      this.rumbleGain = this.ctx.createGain();
-      this.rumbleOsc.type = 'sawtooth';
-      this.rumbleOsc.frequency.setValueAtTime(80, this.ctx.currentTime);
-      this.rumbleOsc.frequency.linearRampToValueAtTime(140, this.ctx.currentTime + 3);
-      this.rumbleGain.gain.setValueAtTime(0.08, this.ctx.currentTime);
-      this.rumbleOsc.connect(this.rumbleGain);
-      this.rumbleGain.connect(this.ctx.destination);
-      this.rumbleOsc.start();
+      const t = this.ctx.currentTime;
+      // Fundamental engine rev scream
+      const osc1 = this.ctx.createOscillator();
+      const gain1 = this.ctx.createGain();
+      osc1.type = 'sawtooth';
+      osc1.frequency.setValueAtTime(280, t);
+      osc1.frequency.exponentialRampToValueAtTime(980, t + 0.7);
+
+      gain1.gain.setValueAtTime(0.18, t);
+      gain1.gain.exponentialRampToValueAtTime(0.001, t + 0.75);
+
+      // 2nd harmonic
+      const osc2 = this.ctx.createOscillator();
+      const gain2 = this.ctx.createGain();
+      osc2.type = 'sine';
+      osc2.frequency.setValueAtTime(560, t);
+      osc2.frequency.exponentialRampToValueAtTime(1960, t + 0.7);
+
+      gain2.gain.setValueAtTime(0.12, t);
+      gain2.gain.exponentialRampToValueAtTime(0.001, t + 0.75);
+
+      osc1.connect(gain1);
+      gain1.connect(this.ctx.destination);
+      osc2.connect(gain2);
+      gain2.connect(this.ctx.destination);
+
+      osc1.start(t);
+      osc2.start(t);
+      osc1.stop(t + 0.75);
+      osc2.stop(t + 0.75);
     } catch {
-      // Ignore
+      // Audio fallback
     }
   }
 
-  stopRumble() {
-    if (this.rumbleOsc) {
-      try {
-        this.rumbleGain?.gain.linearRampToValueAtTime(0.001, this.ctx.currentTime + 0.1);
-        setTimeout(() => {
-          this.rumbleOsc?.stop();
-          this.rumbleOsc = null;
-        }, 120);
-      } catch {
-        this.rumbleOsc = null;
-      }
-    }
-  }
-
-  launch() {
+  // Clean FIA radio penalty notification chime on false start
+  penaltyChime() {
     if (this.muted) return;
-    this.stopRumble();
     this.init();
     if (!this.ctx) return;
     try {
+      const t = this.ctx.currentTime;
       const osc = this.ctx.createOscillator();
       const gain = this.ctx.createGain();
-      osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(220, this.ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(900, this.ctx.currentTime + 0.5);
-      gain.gain.setValueAtTime(0.25, this.ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.55);
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(880, t);
+      osc.frequency.setValueAtTime(580, t + 0.12);
+      gain.gain.setValueAtTime(0.2, t);
+      gain.gain.exponentialRampToValueAtTime(0.001, t + 0.35);
       osc.connect(gain);
       gain.connect(this.ctx.destination);
-      osc.start();
-      osc.stop(this.ctx.currentTime + 0.55);
+      osc.start(t);
+      osc.stop(t + 0.36);
     } catch {
-      // Ignore
-    }
-  }
-
-  penalty() {
-    if (this.muted) return;
-    this.stopRumble();
-    this.init();
-    if (!this.ctx) return;
-    try {
-      const osc = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
-      osc.type = 'square';
-      osc.frequency.setValueAtTime(280, this.ctx.currentTime);
-      osc.frequency.linearRampToValueAtTime(120, this.ctx.currentTime + 0.4);
-      gain.gain.setValueAtTime(0.22, this.ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.45);
-      osc.connect(gain);
-      gain.connect(this.ctx.destination);
-      osc.start();
-      osc.stop(this.ctx.currentTime + 0.45);
-    } catch {
-      // Ignore
+      // Audio fallback
     }
   }
 }
@@ -143,7 +129,6 @@ export default function LightsOutGame() {
   const clearAllTimeouts = () => {
     timeoutsRef.current.forEach((t) => clearTimeout(t));
     timeoutsRef.current = [];
-    sounds.stopRumble();
   };
 
   useEffect(() => {
@@ -159,13 +144,12 @@ export default function LightsOutGame() {
     setGameState('staging');
     setActiveLights(0);
     setReactionTime(null);
-    sounds.startRumble();
 
-    // 5 sequential red lights (1 second apart)
+    // 5 sequential red lights (clean broadcast pips)
     for (let i = 1; i <= 5; i++) {
       const t = setTimeout(() => {
         setActiveLights(i);
-        sounds.beep(480 + i * 60, 0.14);
+        sounds.pip(i);
         if (i === 5) {
           setGameState('holding');
           // FIA random blackout delay between 0.6s and 3.2s
@@ -174,7 +158,7 @@ export default function LightsOutGame() {
             setActiveLights(0);
             setGameState('out');
             lightsOutTimeRef.current = performance.now();
-            sounds.launch();
+            sounds.launchRoar();
           }, randomHold);
           timeoutsRef.current.push(outTimeout);
         }
@@ -192,7 +176,7 @@ export default function LightsOutGame() {
     if (gameState === 'staging' || gameState === 'holding') {
       // Jump start!
       clearAllTimeouts();
-      sounds.penalty();
+      sounds.penaltyChime();
       setGameState('jump');
       setActiveLights(5);
       return;
