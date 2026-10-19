@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { TLink } from '../components/Transition';
 import { Reveal, SplitText, Scramble, Typewriter, Counter, Flag, TrackMap, Marquee } from '../components/ui';
 import DriverCard from '../components/DriverCard';
+import CarShowcase3D from '../components/CarShowcase3D';
+import LightsOutGame from '../components/LightsOutGame';
 import { DRIVERS, TEAMS, CIRCUITS, nextRace, lastRace, shortGP, fmtDate, raceDate } from '../lib/data';
 import { isoFromCountry } from '../lib/flags';
-import { ArrowRight, Trophy, Calendar as CalIcon, Users, MapPin, Zap, Flame } from 'lucide-react';
+import { ArrowRight, Trophy, Calendar as CalIcon, Users, MapPin, Zap, Flame, Wind } from 'lucide-react';
 
 function Countdown({ target }) {
   const [left, setLeft] = useState({ d: 0, h: 0, m: 0, s: 0 });
@@ -163,6 +165,20 @@ export default function HomePage() {
         </section>
       )}
 
+      {/* ---------- 3D CAR SHOWROOM & 2026 ACTIVE AERO ---------- */}
+      <section className="section" style={{ paddingTop: 20 }}>
+        <div className="container">
+          <div className="section-head" style={{ marginBottom: 28 }}>
+            <span className="kicker"><Wind size={14} style={{ color: 'var(--green)' }} /> 2026 TECHNICAL REGULATIONS</span>
+            <h2 className="h-display h-lg">3D CHASSIS & ACTIVE AERO SHOWROOM</h2>
+            <p className="sub">
+              Inspect the next-generation 2026 Formula 1 chassis in real-time 3D. Switch between Z-Mode cornering downforce and X-Mode low-drag straight-line trim, swap official constructor liveries, and test Pirelli 18-inch compounds.
+            </p>
+          </div>
+          <CarShowcase3D />
+        </div>
+      </section>
+
       {/* ---------- TOP 5 TIMING TOWER & RECENT WINNER ---------- */}
       <section className="section" style={{ background: 'linear-gradient(180deg, transparent 0%, rgba(178, 75, 255, 0.04) 50%, transparent 100%)' }}>
         <div className="container">
@@ -246,6 +262,13 @@ export default function HomePage() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ---------- FIA FIVE RED LIGHTS REACTION CHALLENGE ---------- */}
+      <section className="section">
+        <div className="container">
+          <LightsOutGame />
         </div>
       </section>
 
