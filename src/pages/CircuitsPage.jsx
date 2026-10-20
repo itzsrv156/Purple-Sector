@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { Reveal, SplitText, Flag, TrackMap } from '../components/ui';
 import Modal from '../components/Modal';
-import Track3DRibbon from '../components/Track3DRibbon';
 import { CIRCUITS, teamColor } from '../lib/data';
-import { MapPin, Search, Compass, Trophy, Timer, CornerDownRight, CheckCircle2, History, Layers } from 'lucide-react';
+import { MapPin, Search, Compass, Trophy, Timer, CornerDownRight, CheckCircle2, History } from 'lucide-react';
 
 export default function CircuitsPage() {
   const [filter, setFilter] = useState('all'); // 'all' | '2026' | 'street' | 'historic'
   const [search, setSearch] = useState('');
   const [selectedCircuit, setSelectedCircuit] = useState(null);
-  const [trackView, setTrackView] = useState('3d'); // '3d' | '2d'
 
   const filteredCircuits = CIRCUITS.filter((c) => {
     const matchesSearch =
@@ -190,44 +188,13 @@ export default function CircuitsPage() {
               </div>
             </div>
 
-            {/* Interactive Track Visualizer: 3D Elevation Ribbon vs 2D GPS Map */}
-            <div className="panel" style={{ padding: '16px 20px', margin: '20px 0', background: 'rgba(0,0,0,0.45)' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10, marginBottom: 12 }}>
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem', fontWeight: 800, color: 'var(--purple-hot)', letterSpacing: '0.12em' }}>
-                  CIRCUIT TELEMETRY VISUALIZER
-                </span>
-                <div style={{ display: 'inline-flex', background: 'rgba(255, 255, 255, 0.05)', padding: 3, borderRadius: 10, border: '1px solid var(--line)' }}>
-                  <button
-                    type="button"
-                    className={`btn ${trackView === '3d' ? 'btn-primary' : 'btn-ghost'}`}
-                    style={{ padding: '5px 12px', fontSize: '0.75rem', borderRadius: 7 }}
-                    onClick={() => setTrackView('3d')}
-                  >
-                    3D Elevation Ribbon
-                  </button>
-                  <button
-                    type="button"
-                    className={`btn ${trackView === '2d' ? 'btn-primary' : 'btn-ghost'}`}
-                    style={{ padding: '5px 12px', fontSize: '0.75rem', borderRadius: 7 }}
-                    onClick={() => setTrackView('2d')}
-                  >
-                    2D GPS Map
-                  </button>
-                </div>
+            {/* Big Interactive Track Map with animated car */}
+            <div className="panel" style={{ padding: 24, margin: '20px 0', background: 'rgba(0,0,0,0.4)' }}>
+              <div style={{ height: 240, display: 'grid', placeItems: 'center' }}>
+                <TrackMap id={selectedCircuit.id} dot color="var(--purple-hot)" style={{ maxWidth: 380 }} />
               </div>
-
-              {trackView === '3d' ? (
-                <Track3DRibbon circuitId={selectedCircuit.id} circuitName={selectedCircuit.name} height={280} />
-              ) : (
-                <div style={{ height: 260, display: 'grid', placeItems: 'center' }}>
-                  <TrackMap id={selectedCircuit.id} dot color="var(--purple-hot)" style={{ maxWidth: 380 }} />
-                </div>
-              )}
-
-              <div style={{ textAlign: 'center', marginTop: 12, fontFamily: 'var(--font-mono)', fontSize: '0.74rem', color: 'var(--dim)' }}>
-                {trackView === '3d'
-                  ? 'Drag to orbit circuit in 3D · Real-time simulated telemetry with speed & DRS status'
-                  : 'Official GPS racing line · Green beacon highlights start/finish line'}
+              <div style={{ textAlign: 'center', marginTop: 10, fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--dim)' }}>
+                Official GPS racing line · Green beacon indicates start/finish telemetry vector
               </div>
             </div>
 

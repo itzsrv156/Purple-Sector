@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { TLink } from './Transition';
 import { Flag } from './ui';
 import { teamLogo } from '../lib/data';
@@ -28,29 +28,6 @@ export function DriverCutout({ d, className = '', style = {}, ...rest }) {
 }
 
 export default function DriverCard({ d, i = 0, compact = false, onClick }) {
-  const cardRef = useRef(null);
-
-  const handleMouseMove = (e) => {
-    const el = cardRef.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    const rotX = ((y - centerY) / centerY) * -9;
-    const rotY = ((x - centerX) / centerX) * 9;
-    el.style.transform = `perspective(900px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale3d(1.025, 1.025, 1.025)`;
-    el.style.setProperty('--sheen-x', `${(x / rect.width) * 100}%`);
-    el.style.setProperty('--sheen-y', `${(y / rect.height) * 100}%`);
-  };
-
-  const handleMouseLeave = () => {
-    const el = cardRef.current;
-    if (!el) return;
-    el.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-  };
-
   const content = (
     <>
       <div className="dcard-bg" />
@@ -79,12 +56,9 @@ export default function DriverCard({ d, i = 0, compact = false, onClick }) {
   if (onClick) {
     return (
       <div
-        ref={cardRef}
         className={`dcard ${compact ? 'compact' : ''}`}
         style={{ '--tc': d.color }}
         onClick={onClick}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
         role="button"
         tabIndex={0}
         aria-label={`${d.name}, ${d.team}`}
@@ -96,12 +70,9 @@ export default function DriverCard({ d, i = 0, compact = false, onClick }) {
 
   return (
     <TLink
-      ref={cardRef}
       to={`/drivers/${d.id}`}
       className={`dcard ${compact ? 'compact' : ''}`}
       style={{ '--tc': d.color }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
       aria-label={`${d.name}, ${d.team}`}
     >
       {content}

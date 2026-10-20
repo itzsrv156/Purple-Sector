@@ -14,30 +14,15 @@
   background: linear-gradient(180deg, rgba(20, 12, 36, 0.4) 0%, rgba(13, 8, 24, 0.95) 100%);
   overflow: visible;
   padding: 24px;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s, box-shadow 0.4s;
-  transform-style: preserve-3d;
-  will-change: transform;
+  transition: transform 0.4s var(--ease), border-color 0.4s, box-shadow 0.4s;
   isolation: isolate;
   cursor: pointer;
   text-decoration: none;
 }
 .dcard:hover {
+  transform: translateY(-8px);
   border-color: var(--tc, var(--purple));
-  box-shadow: 0 24px 45px -15px rgba(0, 0, 0, 0.85), 0 0 35px -8px var(--tc, var(--purple));
-}
-.dcard::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(circle at var(--sheen-x, 50%) var(--sheen-y, 50%), rgba(255, 255, 255, 0.16) 0%, transparent 65%);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.3s;
-  z-index: 1;
-}
-.dcard:hover::after {
-  opacity: 1;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 0 30px -10px var(--tc, var(--purple));
 }
 .dcard-bg {
   position: absolute;
